@@ -2766,18 +2766,17 @@ video {
                                 "It was the 6th year since we had done this"
                         ],
                         "explanation": "Po konstrukcji \"It was the Nth time since...\" używamy Past Perfect (had done), bo czynność w zdaniu podrzędnym wydarzyła się wcześniej niż moment, o którym mówimy.",
-                        "links": []
+                        "links": [
+                                {
+                                        "label": "Angielska konstrukcja This is the first time - Gettin' English",
+                                        "url": "https://www.gettinenglish.com/angielska-konstrukcja-this-is-the-first-time/#google_vignette",
+                                        "type": "article"
+                                }
+                        ]
                 }
         ],
         "homework": [],
         "media": [
-                {
-                        "lessonLabel": "Lekcja 1",
-                        "dateLabel": "4.09.2026",
-                        "label": "Angielska konstrukcja This is the first time - Gettin' English",
-                        "url": "https://www.gettinenglish.com/angielska-konstrukcja-this-is-the-first-time/#google_vignette",
-                        "type": "article"
-                },
                 {
                         "lessonLabel": "Lekcja 1",
                         "dateLabel": "4.09.2026",
@@ -4455,7 +4454,7 @@ video {
                             }).join('') + '</ul>';
                         }
                         return '<div class="hub-gram">' +
-                            '<p class="hub-gram-topic">' + escapeHtml(g.topic || '') + '</p>' +
+                            (g.topic ? '<p class="hub-gram-topic">' + escapeHtml(g.topic) + '</p>' : '') +
                             '<p class="hub-gram-lesson">' + escapeHtml(g.lessonLabel || '') +
                             (g.dateLabel ? ' &middot; ' + escapeHtml(g.dateLabel) : '') + '</p>' +
                             pair + items +

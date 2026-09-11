@@ -1918,6 +1918,8 @@ video {
                            text-transform:uppercase; letter-spacing:1px; color:var(--hub-muted);
                            margin:26px 0 12px; padding-top:18px; border-top:1px solid var(--hub-line); }
       .hub-section-title.is-first { margin-top:0; padding-top:0; border-top:none; }
+      .hub-lesson-group summary.hub-section-title { cursor:pointer; }
+      .hub-lesson-group summary.hub-section-title.is-first { margin-top:0; }
       .hub-empty { font-family:'Cormorant Garamond', Georgia, serif; font-style:italic; font-size:17px;
                    color:var(--hub-muted); text-align:center; padding:26px 10px; margin:0; }
 
@@ -5006,8 +5008,9 @@ video {
                     box.innerHTML = '<p class="hub-empty">Na razie bez zagadnie&#324; gramatycznych. Poka&#380;&#261; si&#281; tu po kolejnej lekcji.</p>';
                 } else {
                     box.innerHTML = groups.map(function (grp, gi) {
-                        var head = '<p class="hub-section-title' + (gi === 0 ? ' is-first' : '') + '">' +
-                            escapeHtml(grp.label) + (grp.dateLabel ? ' &middot; ' + escapeHtml(grp.dateLabel) : '') + '</p>';
+                        var isLast = (gi === groups.length - 1);
+                        var head = '<summary class="hub-section-title' + (gi === 0 ? ' is-first' : '') + '">' +
+                            escapeHtml(grp.label) + (grp.dateLabel ? ' &middot; ' + escapeHtml(grp.dateLabel) : '') + '</summary>';
                         var body = grp.items.map(function (g) {
                             var pair = '';
                             if (g.mistake || g.correction) {
@@ -5035,7 +5038,7 @@ video {
                                 renderLinks(g.links) +
                                 '</div>';
                         }).join('');
-                        return head + body;
+                        return '<details class="hub-lesson-group"' + (isLast ? ' open' : '') + '>' + head + body + '</details>';
                     }).join('');
                 }
             }
@@ -5094,8 +5097,9 @@ video {
             // Speaker buttons id-uja slowka po pozycji we WSPOLNEJ, plaskiej liscie
             // PRONUNCIATION (nie w obrebie grupy), zeby klikniecie trafialo w wlasciwy element.
             box.innerHTML = groups.map(function (grp, gi) {
-                var head = '<p class="hub-section-title' + (gi === 0 ? ' is-first' : '') + '">' +
-                    escapeHtml(grp.label) + (grp.dateLabel ? ' &middot; ' + escapeHtml(grp.dateLabel) : '') + '</p>';
+                var isLast = (gi === groups.length - 1);
+                var head = '<summary class="hub-section-title' + (gi === 0 ? ' is-first' : '') + '">' +
+                    escapeHtml(grp.label) + (grp.dateLabel ? ' &middot; ' + escapeHtml(grp.dateLabel) : '') + '</summary>';
                 var body = grp.items.map(function (p) {
                     var flatIdx = PRONUNCIATION.indexOf(p);
                     var speaker = speechSupported
@@ -5108,7 +5112,7 @@ video {
                         (p.note ? '<p class="hub-pron-note">' + escapeHtml(p.note) + '</p>' : '') +
                         '</div></div>';
                 }).join('');
-                return head + body;
+                return '<details class="hub-lesson-group"' + (isLast ? ' open' : '') + '>' + head + body + '</details>';
             }).join('');
 
             box.addEventListener('click', function (e) {
